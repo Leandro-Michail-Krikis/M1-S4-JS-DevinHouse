@@ -1,3 +1,17 @@
 body{
     font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+    background-color: #a8adb2;
+}
+footer{
+    
+}
+#conteudo{
+    background-color:aliceblue;
+    margin: 0px auto auto auto;
+    height: 100%;
+    width: 90%;
+}
+#titulo{
+    font-size: xx-large;
 }
