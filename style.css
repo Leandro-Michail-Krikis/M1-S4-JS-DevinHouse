@@ -15,3 +15,11 @@ footer{
 #titulo{
     font-size: xx-large;
 }
+#formulario{
+    margin: 0px auto auto auto;
+    width: 300px;
+    
+}
+#formulario *{
+    width: 100%;
+}
