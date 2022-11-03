@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+    <script src="script.js" async type="module"></script>
     <title>Banco DevInHouse</title>
   </head>
   <body>
@@ -22,17 +22,17 @@
       
       <form id="formulario">
         <label for="name">Nome:</label><br>
-        <input type="text" id="name" name="name"><br>
+        <input type="text" id="name" name="name" required><br>
         <label for="cpf">CPF:</label><br>
-        <input type="text" id="cpf" name="cpf"><br>
+        <input type="text" id="cpf" name="cpf" required><br>
         <label for="celular">Celular:</label><br>
-        <input type="text" id="celular" name="celular"><br>
+        <input type="text" id="celular" name="celular" required><br>
         <label for="senha">Senha:</label><br>
-        <input type="password" id="senha" name="senha"><br>
-        <label for="senhatwo">Confirmação da senha:</label><br>
-        <input type="password" id="senhatwo" name="senhatwo"><br>
-        <input type="submit" value="Enviar"><br>
-        <input type="reset" value="Limpar"><br>
+        <input type="password" id="senha" name="senha" required><br>
+        <label for="senhaVerificacao">Confirmação da senha:</label><br>
+        <input type="password" id="senhaVerificacao" name="senhaVerificacao" required><br>
+        <button type="submit">Enviar</button><br>
+        <button type="reset">Limpar</button><br>
     </form>
       <hr />
       <footer>Instagram: @LeandroDaSilva</footer>
