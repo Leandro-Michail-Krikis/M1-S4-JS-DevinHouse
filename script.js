@@ -14,9 +14,9 @@ function submit(event) {
   event.preventDefault();
   if (event.target.senha.value != event.target.senhaVerificacao.value) {
     alert("as senhas nao conferem.");
-    event.target.senha.value = ""
-    event.target.senhaVerificacao.value = ""
-    return
+    event.target.senha.value = "";
+    event.target.senhaVerificacao.value = "";
+    return;
   }
   contas.push(
     Conta.criarNovaConta(
@@ -36,7 +36,6 @@ function submit(event) {
 
 function submitOperacoes(event) {
   event.preventDefault();
-
   const contas = getContas();
   const contaNumero = event.target.conta.value;
   const senha = event.target.senha.value;
@@ -53,16 +52,21 @@ function submitOperacoes(event) {
       break;
 
     case "saldo":
-      saldo();
+      saldo(contas, contaNumero);
       break;
   }
+
+  setContas(contas);
 }
 
 const isNotUsuarioValido = (arrayContas, contaNumero, senha) => {
-    arrayContas.forEach(obj => {
-      if(obj.nome == contaNumero && obj.senha == senha) return false;
-    });
-    return true
+  let x = arrayContas.findIndex(obj => {
+    if (obj.conta == contaNumero && obj.senha == senha) {
+      return true;
+    }
+  });
+  if (x < 0) return true;
+  return false;
 };
 
 const setContas = (array) => {
@@ -77,14 +81,24 @@ const getContas = () => {
   }
 };
 
-const saque = () => {
+const saque = (arrayContas, contaNumero) => {};
 
-}
+const deposito = () => {};
 
-const deposito = () => {
+const saldo = (arrayContas, contaNumero) => {
+  arrayContas.forEach((obj) => {
+    if (obj.conta == contaNumero) alert("Seu saldo é " + obj.saldo);
+  });
+};
 
-}
+const selecionaOperacao = () => {
+  const selectedValue = document.getElementById("operacoes").value;
+  const valorElement = document.getElementById("valor");
+  if (selectedValue == "saldo") {
+    valorElement.disabled = true;
+  } else {
+    valorElement.disabled = false;
+  }
+};
 
-const saldo = () => {
-  
-}
+document.selecionaOperacao = selecionaOperacao;
