@@ -18,6 +18,7 @@ function submit(event) {
     event.target.senhaVerificacao.value = "";
     return;
   }
+  debugger;
   contas.push(
     Conta.criarNovaConta(
       event.target.name.value,
@@ -39,34 +40,48 @@ function submitOperacoes(event) {
   const contas = getContas();
   const contaNumero = event.target.conta.value;
   const senha = event.target.senha.value;
+  const valor = event.target.valor.value;
+  console.log(valor);
 
-  if (isNotUsuarioValido(contas, contaNumero, senha)) return;
+  if (valor == "" || valor <= 0) {
+    alert("Valor invalido.");
+    return;
+  }
+
+  // if (isNotUsuarioValido(contas, contaNumero, senha)) {
+  //   alert("Usuario nao existe.");
+  //   return;
+  // }
+  const indexUsuario = retornaIndexUsuario(contas, contaNumero, senha);
+  if (indexUsuario < 0) {
+    alert("Usuario inexistente.");
+    return;
+  }
+  let contaUsuario = contas[indexUsuario];
 
   switch (event.target.operacoes.value) {
     case "saque":
-      saque();
+      contas[indexUsuario] = saque(contaUsuario, valor);
       break;
 
     case "deposito":
-      deposito();
+      contas[indexUsuario] = deposito(contaUsuario, valor);
       break;
 
     case "saldo":
-      saldo(contas, contaNumero);
+      saldo(contaUsuario);
       break;
   }
 
   setContas(contas);
 }
 
-const isNotUsuarioValido = (arrayContas, contaNumero, senha) => {
-  let x = arrayContas.findIndex(obj => {
+const retornaIndexUsuario = (arrayContas, contaNumero, senha) => {
+  return arrayContas.findIndex((obj) => {
     if (obj.conta == contaNumero && obj.senha == senha) {
       return true;
     }
   });
-  if (x < 0) return true;
-  return false;
 };
 
 const setContas = (array) => {
@@ -75,20 +90,24 @@ const setContas = (array) => {
 
 const getContas = () => {
   try {
-    return JSON.parse(localStorage.getItem("contas"));
+    let retorno = JSON.parse(localStorage.getItem("contas"));
+    if (retorno == null) return [];
+    return retorno;
   } catch (error) {
     return [];
   }
 };
 
-const saque = (arrayContas, contaNumero) => {};
+const saque = () => {};
 
-const deposito = () => {};
+const deposito = (contaUsuario, valor) => {
+  contaUsuario.saldo += parseInt(valor)
+  alert("Seu novo saldo e:" + contaUsuario.saldo)
+  return contaUsuario
+};
 
-const saldo = (arrayContas, contaNumero) => {
-  arrayContas.forEach((obj) => {
-    if (obj.conta == contaNumero) alert("Seu saldo é " + obj.saldo);
-  });
+const saldo = (contaUsuario) => {
+  alert("Seu saldo é: " + contaUsuario.saldo)
 };
 
 const selecionaOperacao = () => {
