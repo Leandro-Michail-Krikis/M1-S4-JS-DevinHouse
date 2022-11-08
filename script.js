@@ -98,7 +98,17 @@ const getContas = () => {
   }
 };
 
-const saque = () => {};
+const saque = (contaUsuario, valor) => {
+  let tempSaldo = contaUsuario.saldo
+  tempSaldo -= parseInt(valor)
+  if(tempSaldo < 0) {
+    alert("Saldo insuficiente.")
+  } else {
+    contaUsuario.saldo = tempSaldo
+    alert("Seu novo saldo e:" + contaUsuario.saldo)
+  }
+  return contaUsuario
+};
 
 const deposito = (contaUsuario, valor) => {
   contaUsuario.saldo += parseInt(valor)
